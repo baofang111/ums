@@ -1,0 +1,103 @@
+##########################################################
+##################  所有profile共有的配置  #################
+##########################################################
+
+###################  项目启动端口  ###################
+server:
+  port: 8080
+
+###################  MyBatis 分页插件配置  ###################
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+
+###################  beetl配置  ###################
+beetl:
+  delimiter-statement-start: \@   #开始结束标签(yaml不允许@开头)
+  delimiter-statement-end: null
+  resource-tagroot: common/tags   #自定义标签文件Root目录和后缀
+  resource-tagsuffix: tag
+  resource-auto-check: true #是否检测文件变化,开发用true合适，但线上要改为false
+
+
+###################  spring配置  ###################
+spring:
+  # spring redis 配置 ----> 请配置本机redis
+  redis:
+    host: 192.168.182.129
+    timeout: 0
+    port: 6379
+    password: 123456
+  profiles:
+    active: dev # 指定开发环境
+  mvc:
+    static-path-pattern: /static/**
+    view:
+      prefix: /WEB-INF/view
+  http:
+    converters:
+      preferred-json-mapper: fastjson
+    multipart:
+      max-request-size: 100MB #最大请求大小
+      max-file-size: 100MB #最大文件大小
+  devtools:
+    restart:
+      enabled: true #是否开启开发者工具（true/false）
+      additional-paths: src/main/java
+      exclude: static/**,WEB-INF/view/**
+
+---
+
+##########################################################
+###################  开发环境的profile  ###################
+##########################################################
+spring:
+  profiles: dev
+  datasource:
+      url: jdbc:mysql://127.0.0.1:3306/ums?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: root123
+      filters: log4j,wall,mergeStat
+
+#多数据源
+biz:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/biz?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: root123
+
+#logging:
+ # level.root: info
+  #level.com.stylefeng: debug
+  #path: logs/
+  #file: ums.log
+
+---
+
+##########################################################
+###################  正式环境的profile  ###################
+##########################################################
+spring:
+  profiles: produce
+  datasource:
+      url: jdbc:mysql://127.0.0.1:3306/ums?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+      username: root
+      password: root123
+      filters: log4j,wall,mergeStat
+
+#logging:
+ # level.root: warn
+  #path: logs/
+  #file: ums.log
+
+
+########################jwt 配置################################
+jwt:
+  header: Authorization   #http请求头所需要的字段
+  secret: mySecret        #jwt秘钥
+  expiration: 604800      #7天 单位:秒
+  auth-path: auth         #认证请求的路径
+  md5-key: randomKey      #md5加密混淆key
