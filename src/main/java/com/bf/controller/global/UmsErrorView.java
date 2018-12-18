@@ -1,4 +1,4 @@
-package com.bf.conttroller.global;
+package com.bf.controller.global;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.View;

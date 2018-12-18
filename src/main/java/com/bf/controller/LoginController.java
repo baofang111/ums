@@ -1,8 +1,8 @@
-package com.bf.conttroller;
+package com.bf.controller;
 
 import com.bf.common.entity.User;
 import com.bf.common.node.MenuNode;
-import com.bf.conttroller.global.BaseController;
+import com.bf.controller.global.BaseController;
 import com.bf.core.shiro.ShiroKit;
 import com.bf.core.shiro.ShiroUser;
 import com.bf.core.shiro.factory.RedisShiroFactory;

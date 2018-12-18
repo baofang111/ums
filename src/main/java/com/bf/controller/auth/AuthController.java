@@ -1,4 +1,4 @@
-package com.bf.conttroller.auth;
+package com.bf.controller.auth;
 
 import com.bf.common.constant.Constant;
 import com.bf.core.model.AuthRequest;

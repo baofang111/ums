@@ -1,4 +1,4 @@
-package com.bf.conttroller.global;
+package com.bf.controller.global;
 
 import com.bf.core.support.HttpKit;
 

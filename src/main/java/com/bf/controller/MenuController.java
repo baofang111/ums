@@ -1,4 +1,4 @@
-package com.bf.conttroller;
+package com.bf.controller;
 
 import org.springframework.stereotype.Controller;
 
